@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Series Encontradas "{{search_term}}"{% endblock %}
+<body>
+    {% block content %}
+        <div class="row card-deck">
+            <!-- Tarjeta 1 -->
+            {% for pelicula in peliculas %}
+
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
+                <div class="card">
+                    <a href="{{ url_for('serie', id=pelicula[0]) }}" class="card-link">
+                        <img src="{{ pelicula[2] }}" class="card-img" alt="{{ pelicula[1] }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ pelicula[1] }}</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+
+{% endblock %}
+</body>

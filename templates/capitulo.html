@@ -1,0 +1,122 @@
+
+{% extends "layout.html" %}
+{% block page%} Retro Series {% endblock%}
+{% block title %} {{capitulo[0]}} {% endblock %}
+{% block content %}
+
+    <style>
+    /* Estilos generales */
+.movie-details {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+.movie-image {
+    flex: 1;
+    max-width: 200px;
+    margin-right: 20px;
+}
+.movie-info {
+    flex: 2;
+    color: azure;
+}
+.movie-info p {
+    margin: 10px; /* Espacio entre párrafos */
+}
+.movie-info strong {
+    color: #FFD700; /* Cambia el color a tu preferencia */
+    display: inline; /* Alinea `strong` y párrafos en la misma línea en pantallas grandes */
+    margin-right: 10px; /* Espacio entre `strong` y el párrafo */
+}
+.movie-info .info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.iframe-container {
+    margin: 20px auto; /* Centra el contenedor horizontalmente */
+    background-color: #080f28;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #FFD700; /* Añade borde dorado alrededor del contenedor */
+    max-width: 100%; /* Ajusta el ancho máximo del contenedor */
+    width: 1000px; /* Ancho fijo del contenedor, ajusta según sea necesario */
+    text-align: center; /* Centra el contenido del iframe */
+}
+.iframe-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFD700;
+    margin-bottom: 15px; /* Espacio debajo del título del contenedor del iframe */
+}
+.iframe-container iframe {
+    width: 100%;
+    height: 450px; /* Ajusta la altura del iframe según sea necesario */
+    border: none; /* Quita el borde del iframe */
+}
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    .movie-details {
+        flex-direction: column;
+        align-items: center;
+    }
+    .movie-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+        max-width: 100%;
+    }
+    .movie-info {
+        text-align: center; /* Centra el texto en móviles */
+    }
+    .movie-info .info-item {
+        display: block; /* Muestra `strong` y `p` en bloques separados en móviles */
+        margin-bottom: 20px; /* Espacio entre elementos en móviles */
+    }
+    .movie-info strong {
+        display: block; /* Muestra cada `strong` en una línea separada en móviles */
+        margin: 0 auto; /* Centra `strong` en móviles */
+    }
+    .movie-info p {
+        margin: 0 auto; /* Centra los párrafos en móviles */
+        text-align: center; /* Centra el texto del párrafo */
+    }
+    .iframe-container {
+        padding: 10px;
+        max-width: 100%; /* Asegura que el contenedor no se desborde en pantallas pequeñas */
+        width: 100%; /* Ajusta el ancho para que se adapte a la pantalla */
+    }
+    .iframe-title {
+        font-size: 1.2rem; /* Ajusta el tamaño del texto para móviles si es necesario */
+    }
+    .iframe-container iframe {
+        height: 300px; /* Ajusta la altura del iframe para pantallas móviles si es necesario */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Detalles de la Serie -->
+    <div class="movie-details">
+        <!-- Imagen de la Serie -->
+        <div class="movie-image">
+            <img src="{{capitulo[1]}}" alt="Imagen de la Serie" class="img-fluid">
+        </div>
+        <!-- Información de la Serie -->
+        <div class="movie-info">
+            <p><strong>Titulo:</strong>{{ capitulo[0] }} </p>
+            <p><strong>Año:</strong>{{ capitulo[3] }} </p>
+            <p><strong>Género:</strong>{{ capitulo[4] }} </p>
+            <p><strong>Sinopsis:</strong> {{ capitulo[2] }}</p>
+        </div>
+    </div>
+
+    <!-- Contenedor para el iframe -->
+    <div class="iframe-container">
+        <div class="iframe-title">Temp {{ capitulo[5] }} Capitulo {{ capitulo[6] }} </div>
+        <iframe src="{{ capitulo[7] }}" frameborder="0" allowfullscreen></iframe>
+    </div>
+</body>
+
+
+{% endblock%}

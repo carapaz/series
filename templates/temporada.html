@@ -1,0 +1,153 @@
+
+{% extends "layout.html" %}
+{% block page%} Retro Series {% endblock%}
+{% block title %} {{ capitulos[0][0] }} {% endblock %}
+{% block content %}
+
+    <style>
+    /* Estilos generales */
+.movie-details {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+.movie-image {
+    flex: 1;
+    max-width: 200px;
+    margin-right: 20px;
+}
+.movie-info {
+    flex: 2;
+    color: azure;
+}
+.movie-info p {
+    margin: 10px; /* Espacio entre párrafos */
+}
+.movie-info strong {
+    color: #FFD700; /* Cambia el color a tu preferencia */
+    display: inline; /* Alinea `strong` y párrafos en la misma línea en pantallas grandes */
+    margin-right: 10px; /* Espacio entre `strong` y el párrafo */
+}
+.movie-info .info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.chapters-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #080f28;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #FFD700; /* Añade borde dorado alrededor del contenedor */
+}
+.chapters-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFD700;
+    margin-bottom: 15px; /* Espacio debajo del título del contenedor de capítulos */
+    text-align: center; /* Centra el título en pantallas grandes */
+}
+.chapters-list {
+    list-style-type: none;
+    padding: 0;
+}
+.chapters-list li {
+    margin-bottom: 10px;
+    border: 1px solid #FFD700; /* Añade borde dorado alrededor de cada capítulo */
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #080f28; /* Opcional: color de fondo para los ítems */
+}
+.chapter-link {
+    display: block;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #FFD700;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+.chapter-link:hover {
+    background-color: #e5b800;
+    color: #fff;
+}
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    .movie-details {
+        flex-direction: column;
+        align-items: center;
+    }
+    .movie-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+        max-width: 100%;
+    }
+    .movie-info {
+        text-align: center; /* Centra el texto en móviles */
+    }
+    .movie-info .info-item {
+        display: block; /* Muestra `strong` y `p` en bloques separados en móviles */
+        margin-bottom: 20px; /* Espacio entre elementos en móviles */
+    }
+    .movie-info strong {
+        display: block; /* Muestra cada `strong` en una línea separada en móviles */
+        margin: 0 auto; /* Centra `strong` en móviles */
+    }
+    .movie-info p {
+        margin: 0 auto; /* Centra los párrafos en móviles */
+        text-align: center; /* Centra el texto del párrafo */
+    }
+    .chapters-container {
+        padding: 10px;
+    }
+    .chapter-link {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+    .chapters-title {
+        font-size: 1.2rem; /* Ajusta el tamaño del texto para móviles si es necesario */
+        white-space: nowrap; /* Evita que el título se rompa en móviles */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es demasiado largo */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Detalles de la Serie -->
+    <div class="movie-details">
+        <!-- Imagen de la Serie -->
+        <div class="movie-image">
+            <img src="{{ capitulos[0][1] }}" alt="Imagen de la Serie" class="img-fluid">
+        </div>
+        <!-- Información de la Serie -->
+        <div class="movie-info">
+            <p><strong>Titulo:</strong> {{ capitulos[0][0] }}</p>
+            <p><strong>Año:</strong> {{ capitulos[0][3] }}</p>
+            <p><strong>Género:</strong> {{ capitulos[0][4] }}</p>
+            <p><strong>Sinopsis:</strong> {{ capitulos[0][2] }}</p>
+        </div>
+    </div>
+
+    <!-- Contenedor de Capítulos -->
+    <div class="chapters-container">
+        
+        <div class="chapters-title">Capitulos Temporada {{ capitulos[0][5] }}</div>
+        <ul class="chapters-list">
+            {% for capitulo in capitulos %}  
+            <li>
+                <a href="{{ url_for('capitulo', id=capitulo[9]) }}" class="season-button">capitulo {{capitulo[6]}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+{% endblock%}
+
+
+

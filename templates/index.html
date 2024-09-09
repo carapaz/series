@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block page%} Retro Series {% endblock%}
+{% block title %}Todas Las Series{% endblock %}
+
+{% block content %}
+        <div class="row card-deck">
+            <!-- Tarjeta 1 -->
+            {% for pelicula in peliculas %}
+
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
+                <div class="card">
+                    <a href="{{ url_for('serie', id=pelicula[0]) }}" class="card-link">
+                        <img src="{{ pelicula[2] }}" class="card-img" alt="{{ pelicula[1] }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ pelicula[1] }}</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+        <!-- Paginación -->
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if page > 1 %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('home', page=page - 1) }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if pages_to_show[0] > 1 %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+
+                    {% for p in pages_to_show %}
+                        <li class="page-item {{ 'active' if p == page else '' }}">
+                            <a class="page-link" href="{{ url_for('home', page=p) }}">{{ p }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if pages_to_show[-1] < total_pages %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+
+                    {% if page < total_pages %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('home', page=page + 1) }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        
+{% endblock %}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Películas</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #080f28; /* Fondo claro para el cuerpo */
+            margin-top: 56px; /* Margen superior para compensar la altura del navbar fijo */
+        }
+        .navbar {
+            background-color: #080f28; /* Color del navbar */
+        }
+        .navbar-brand, .nav-link, .form-control, .btn {
+            color: #ffffff;
+        }
+        .navbar-custom {
+            max-width: 1200px; /* Ancho máximo del navbar igual al del contenedor principal */
+            margin: 0 auto; /* Centrar el navbar horizontalmente */
+            width: 100%; /* Asegurarse de que el navbar ocupe todo el ancho del contenedor */
+        }
+        .title-container {
+            margin-bottom: 30px;
+            margin-top: 30px;
+            background-color: #007AFF;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+            padding: 15px 0;
+            margin-left: 20px;
+        }
+        .card-img {
+            width: 100%; /* Ajusta el ancho de la imagen al contenedor de la tarjeta */
+            height: auto;
+            max-height: 267px; /* Ajustar altura máxima */
+            object-fit: cover;
+        }
+        .card {
+            width: 100%;
+            max-width: 220px; /* Ancho máximo de la tarjeta */
+            border: none;
+            border-radius: 8px;
+            margin: 0 auto; /* Centrar la tarjeta */
+            margin-bottom: 20px;
+            text-align: center; /* Centrar el contenido de la tarjeta */
+            overflow: hidden; /* Asegura que el contenido no se desborde del contenedor */
+            background-color: #080f28; /* Color del contenedor */
+        }
+        .card-body {
+            padding: 10px; /* Ajusta el espaciado dentro de la tarjeta según sea necesario */
+        }
+        .card-title {
+            margin: 0; /* Elimina el margen superior e inferior del título */
+            font-size: 1.25rem; /* Ajusta el tamaño de la fuente según sea necesario */
+            color: #fff; /* Ajusta el color del texto según sea necesario */
+            white-space: nowrap; /* Asegura que el texto no se rompa en varias líneas */
+            overflow: hidden; /* Oculta el texto que se desborda */
+            text-overflow: ellipsis; /* Muestra puntos suspensivos (...) si el texto se desborda */
+        }
+        .social-section {
+            background-color: #3D4F91; /* Color de fondo de la sección de redes sociales */
+            color: #ffffff;
+            text-align: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+        .footer {
+            background-color: #080f28; /* Color del footer */
+            color: #ffffff;
+            text-align: center;
+            padding: 15px 0;
+        }
+        .container {
+            background-color: #080f28; /* Color del contenedor */
+            max-width: 1200px; /* Ancho máximo del contenedor */
+            width: 100%; /* Ancho del contenedor al 100% del viewport */
+            margin: 0 auto; /* Centrar el contenedor horizontalmente */
+        }
+        .card-deck .card {
+            flex: 1 0 calc(20% - 30px); /* Mostrar 5 tarjetas por fila en pantallas grandes */
+        }
+        @media (max-width: 767px) {
+            .title {
+                font-size: 1.5rem;
+            }
+            .card-img {
+                max-height: 300px; /* Ajustar altura de la imagen en pantallas pequeñas */
+            }
+            .card {
+                flex: 1 0 calc(50% - 30px); /* Mostrar 2 tarjetas por fila en móviles */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container navbar-custom"> <!-- Contenedor para el navbar -->
+            <a class="navbar-brand" href="#">{% block page%} {% endblock%}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Pagina Principal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Peliculas</a>
+                    </li>
+                </ul>
+                <form class="form-inline ml-auto" method="POST" action="{{url_for('buscador')}}">
+                    <input class="form-control mr-sm-2" type="search" name="search_term" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Contenedor Principal -->
+    <div class="container">
+        <!-- Título -->
+        <div class="title-container">
+            <h1 class="title">{% block title %} {% endblock %}</h1>
+        </div>
+
+        <!-- Tarjetas de Películas -->
+
+            {% block content %}
+            <!-- El contenido específico de cada vista irá aquí -->
+            {% endblock %}
+        <!-- Sección de Redes Sociales -->
+        <div class="social-section">
+            <p>¡Síguenos en nuestras redes sociales!</p>
+            <a href="#" class="text-white">Facebook</a> |
+            <a href="#" class="text-white">Telegram</a> |
+            <a href="#" class="text-white">WhatsApp</a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Retro Películas</p>
+        </footer>
+    </div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
